@@ -27,7 +27,7 @@ const Menu: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://back-dicionario-minerais.onrender.com/minerals")
+    fetch("http://localhost:8080/minerals")
       .then((res) => res.json())
       .then((data) => {
         setMinerals(data);

@@ -30,7 +30,7 @@ const MineralDetails: React.FC = () => {
 useEffect(() => {
   setLoading(true);
 
-  fetch(`https://back-dicionario-minerais.onrender.com/minerals/${id}`)
+  fetch(`https://localhost:8080/minerals/${id}`)
     .then((res) => res.json())
     .then((data) => {
       setMineral(data);
