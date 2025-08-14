@@ -1,13 +1,14 @@
-  .loading {
-    margin-top: -1100px;
-    align-items: center;
-    justify-content: center;
-  }
+.loading {
+  margin-top: -1100px;
+  align-items: center;
+  justify-content: center;
+}
 
 .menu-container {
   padding: 20px;
   font-family: Arial, sans-serif;
-  padding-top: 1950px;
+  padding-top: 50px;
+  background-color: #ffffff;
 }
 
 .search-bar-container {
@@ -29,7 +30,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   justify-items: center;
-  margin-top: 200px;
+  margin-top: 50px;
 }
 
 .mineral-card {
@@ -55,19 +56,18 @@
 }
 
 @media (max-width: 768px) {
-
-    .loading {
-    margin-top: -1450px;
+  .loading {
+    margin-top: 290px;
     align-items: center;
     justify-content: center;
   }
 
-  .menu-container{
-    margin-top: 750px;
+  .menu-container {
+    margin-top: 250px;
   }
   .minerals-grid {
     grid-template-columns: repeat(2, 1fr);
-    margin-top: 450px;
+    margin-top: 20px;
   }
 
   .mineral-card {
@@ -84,13 +84,13 @@
 }
 
 @media (max-width: 480px) {
-      .loading {
+  .loading {
     margin-top: -1450px;
     align-items: center;
     justify-content: center;
   }
-    .menu-container{
-    margin-top: 650px;
+  .menu-container {
+    margin-top: 50px;
   }
   .minerals-grid {
     gap: 15px;

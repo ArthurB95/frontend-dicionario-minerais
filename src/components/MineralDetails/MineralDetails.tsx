@@ -30,7 +30,7 @@ const MineralDetails: React.FC = () => {
 useEffect(() => {
   setLoading(true);
 
-  fetch(`https://localhost:8080/minerals/${id}`)
+  fetch(`${import.meta.env.VITE_API_URL_PRD}/minerals/${id}`)
     .then((res) => res.json())
     .then((data) => {
       setMineral(data);

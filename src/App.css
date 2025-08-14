@@ -1,13 +1,12 @@
-
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: #FFFFFF;
+  font-family: "Poppins", sans-serif;
+  background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 }
 
 .container {
@@ -17,7 +16,7 @@ body {
 }
 
 .title {
-  background-color: #33A853;
+  background-color: #33a853;
   color: white;
   font-weight: 700;
   font-size: 1.8rem;
@@ -31,7 +30,7 @@ body {
 }
 
 .btn-enter {
-  background-color: #33A853;
+  background-color: #33a853;
   color: white;
   font-weight: 700;
   font-size: 1.1rem;
@@ -70,7 +69,7 @@ body {
     border-top-left-radius: 30px;
     border-bottom-right-radius: 30px;
   }
-  
+
   .btn-enter {
     font-size: 1rem;
     padding: 10px 30px;

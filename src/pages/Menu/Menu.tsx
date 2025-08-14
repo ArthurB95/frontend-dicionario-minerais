@@ -27,7 +27,7 @@ const Menu: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8080/minerals")
+    fetch(`${import.meta.env.VITE_API_URL_PRD}/minerals`)
       .then((res) => res.json())
       .then((data) => {
         setMinerals(data);
@@ -52,18 +52,18 @@ const Menu: React.FC = () => {
       </div>
 
       {loading ? (
-      <div className="loading">
-        <DotLottieReact src="../src/assets/loading.json" loop autoplay />
-      </div>
-    ) : filteredMinerals.length === 0 ? (
-      <div className="loading">
-        <DotLottieReact src="../src/assets/nodata.json" loop autoplay />
-      </div>
-    ) : (
-      <MineralsGrid
-        minerals={filteredMinerals.map((m) => ({ id: m.id, name: m.name }))}
-      />
-    )}
+        <div className="loading">
+          <DotLottieReact src="../src/assets/loading.json" loop autoplay />
+        </div>
+      ) : filteredMinerals.length === 0 ? (
+        <div className="loading">
+          <DotLottieReact src="../src/assets/nodata.json" loop autoplay />
+        </div>
+      ) : (
+          <MineralsGrid
+            minerals={filteredMinerals.map((m) => ({ id: m.id, name: m.name }))}
+          />
+      )}
     </div>
   );
 };
