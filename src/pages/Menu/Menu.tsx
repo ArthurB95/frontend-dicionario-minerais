@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import MineralsGrid from "../../components/MineralsGrid/MineralsGrid";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import SkeletonLoader from "../../components/Skeleton/SkeletonLoader";
 import "../Menu/Menu.css";
 
 interface Mineral {
@@ -27,7 +28,7 @@ const Menu: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-        const fetchMinerals = async () => {
+       const fetchMinerals = async () => {
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL_PRD}/minerals`
@@ -62,9 +63,7 @@ const Menu: React.FC = () => {
       </div>
 
       {loading ? (
-        <div className="loading">
-          <DotLottieReact src="../src/assets/loading.json" loop autoplay />
-        </div>
+        <SkeletonLoader />
       ) : filteredMinerals.length === 0 ? (
         <div className="loading">
           <DotLottieReact src="../src/assets/nodata.json" loop autoplay />
