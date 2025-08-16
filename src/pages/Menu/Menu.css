@@ -5,10 +5,14 @@
 }
 
 .menu-container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  padding-top: 50px;
-  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  align-items: center; 
+  min-height: 100vh; 
+  box-sizing: border-box; 
+  padding-top: 80px;
+  gap: 2rem;
 }
 
 .search-bar-container {
