@@ -27,16 +27,26 @@ const Menu: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL_PRD}/minerals`)
-      .then((res) => res.json())
-      .then((data) => {
+        const fetchMinerals = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL_STAGING}/minerals`
+        );
+
+        if (!response.ok) {
+          throw new Error(`Erro na requisição: ${response.status}`);
+        }
+
+        const data: Mineral[] = await response.json();
         setMinerals(data);
+      } catch (error) {
+        console.error("Erro ao buscar minerais:", error);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Erro ao buscar minerais:", err);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchMinerals();
   }, []);
 
   const filteredMinerals = minerals

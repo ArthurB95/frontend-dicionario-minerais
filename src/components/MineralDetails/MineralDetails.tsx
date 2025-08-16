@@ -28,19 +28,28 @@ const MineralDetails: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
 useEffect(() => {
-  setLoading(true);
+    const fetchMineral = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL_STAGING}/minerals/${id}`
+        );
 
-  fetch(`${import.meta.env.VITE_API_URL_PRD}/minerals/${id}`)
-    .then((res) => res.json())
-    .then((data) => {
-      setMineral(data);
-      setLoading(false);
-    })
-    .catch((err) => {
-      console.error("Erro ao buscar mineral:", err);
-      setLoading(false);
-    });
-}, [id]);
+        if (!response.ok) {
+          throw new Error(`Erro HTTP! status: ${response.status}`);
+        }
+
+        const data: Mineral = await response.json();
+        setMineral(data);
+      } catch (error) {
+        console.error("Erro ao buscar mineral:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMineral();
+  }, [id]);
 
   return (
     <div className="details-container">
