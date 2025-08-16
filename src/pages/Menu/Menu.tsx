@@ -65,8 +65,8 @@ const Menu: React.FC = () => {
       {loading ? (
         <SkeletonLoader />
       ) : filteredMinerals.length === 0 ? (
-        <div className="loading">
-          <DotLottieReact src="../src/assets/nodata.json" loop autoplay />
+        <div className="erro-message">
+          <p>Mineral não encontrado</p>
         </div>
       ) : (
           <MineralsGrid
