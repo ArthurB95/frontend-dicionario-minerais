@@ -32,7 +32,7 @@ useEffect(() => {
       setLoading(true);
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL_STAGING}/minerals/${id}`
+          `${import.meta.env.VITE_API_URL_PRD}/minerals/${id}`
         );
 
         if (!response.ok) {
