@@ -72,7 +72,7 @@
 
   .minerals-grid {
     grid-template-columns: repeat(2, 1fr);
-    margin-top: 20px;
+    margin-top: -20px;
   }
 
   .mineral-card {
