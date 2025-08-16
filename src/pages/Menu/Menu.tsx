@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import MineralsGrid from "../../components/MineralsGrid/MineralsGrid";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import SkeletonLoader from "../../components/Skeleton/SkeletonLoader";
 import "../Menu/Menu.css";
 
