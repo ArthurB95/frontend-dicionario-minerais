@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import MineralsGrid from "../../components/MineralsGrid/MineralsGrid";
 import SkeletonLoader from "../../components/Skeleton/SkeletonLoader";
 import { ChevronRight, Info, Search, X } from "lucide-react";
-import "../Menu/Menu.css";
 import { Link } from "react-router-dom";
 
 interface Mineral {
@@ -54,19 +51,26 @@ interface DisplayItem {
   color?: string;
 }
 
+const ITEMS_PER_PAGE = 10;
+
 const Menu: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [minerals, setMinerals] = useState<Mineral[]>([]);
   const [macroMinerals, setMacroMinerals] = useState<MacroMinerals[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("Todos");
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+
+  useEffect(() => {
+    setVisibleCount(ITEMS_PER_PAGE);
+  }, [filter, searchTerm]);
 
   useEffect(() => {
     const fetchAllData = async () => {
       try {
         const [mineralsRes, macroRes] = await Promise.all([
-          fetch(`${import.meta.env.VITE_API_URL_STAGING}/minerals`),
-          fetch(`${import.meta.env.VITE_API_URL_STAGING}/macro-minerals`),
+          fetch(`${import.meta.env.VITE_API_URL_PRD}/minerals`),
+          fetch(`${import.meta.env.VITE_API_URL_PRD}/macro-minerals`),
         ]);
 
         if (!mineralsRes.ok || !macroRes.ok) {
@@ -119,7 +123,7 @@ const Menu: React.FC = () => {
     .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
-    <div className="bg-white pt-12 pb-4 px-6 shadow-sm sticky top-0 z-10">
+    <div className="flex flex-col min-h-screen bg-white pt-12 pb-4 px-6 shadow-sm">
       {/* Header Personalizado */}
       <div className="flex justify-between items-center mb-4">
         <div>
@@ -136,8 +140,8 @@ const Menu: React.FC = () => {
         </div>
         <input
           type="text"
-          className="block w-full pl-10 pr-10 py-3 border border-gray-100 rounded-xl leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all shadow-inner"
-          placeholder="Buscar por nome ou símbolo..."
+          className="block text-gray-900 w-full pl-10 pr-10 py-3 border border-gray-100 rounded-xl leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all shadow-inner"
+          placeholder="Buscar por nome"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -160,8 +164,8 @@ const Menu: React.FC = () => {
             className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap border
                 ${
                   filter === type
-                    ? "bg-blue-600 text-white border-blue-600 shadow-md transform scale-105"
-                    : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50"
+                    ? "!bg-blue-600 !text-white !border-blue-600 shadow-md transform scale-105"
+                    : "!bg-white !text-gray-600 !border-gray-200 hover:!bg-gray-50"
                 }`}
           >
             {type === "Todos" ? "Todos" : `${type}minerais`}
@@ -172,9 +176,9 @@ const Menu: React.FC = () => {
       {/* Lista de Cards */}
       <div className="p-4 space-y-3 pb-20 overflow-y-auto bg-gray-50 flex-1">
         {loading ? (
-          <p className="text-center text-gray-500">Carregando...</p>
+          <SkeletonLoader />
         ) : (
-          filteredItems.map((item) => (
+          filteredItems.slice(0, visibleCount).map((item) => (
             <Link
               key={item.uniqueId}
               to={`/${item.routePrefix}/${item.originalId}`}
@@ -189,7 +193,6 @@ const Menu: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-2">
-                {/* Descomentei a etiqueta discreta para ajudar o usuário a ver a diferença visualmente! */}
                 <span
                   className={`text-[10px] px-2 py-0.5 rounded border font-medium ${
                     item.type === "Macro"
@@ -203,6 +206,15 @@ const Menu: React.FC = () => {
               </div>
             </Link>
           ))
+        )}
+
+        {!loading && visibleCount < filteredItems.length && (
+          <button
+            onClick={() => setVisibleCount((prev) => prev + ITEMS_PER_PAGE)}
+            className="w-full py-4 mt-2 bg-white border border-gray-200 rounded-xl text-blue-600 font-semibold text-sm hover:bg-gray-50 transition-colors shadow-sm"
+          >
+            Ver mais minerais ({filteredItems.length - visibleCount} restantes)
+          </button>
         )}
       </div>
     </div>
