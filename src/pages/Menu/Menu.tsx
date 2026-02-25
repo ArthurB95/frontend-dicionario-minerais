@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SkeletonLoader from "../../components/Skeleton/SkeletonLoader";
-import { ChevronRight, Info, Search, X } from "lucide-react";
+import { ChevronRight, Search, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface Mineral {
