@@ -11,9 +11,8 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/menu" element={<Menu />} />
+        <Route path="/" element={<Menu />} />
         <Route path="/minerals/:id" element={<MineralDetails />} />
-        <Route path="/macro-minerals/:id" element={<MineralDetails />} />
       </Routes>
     </Router>
   );
