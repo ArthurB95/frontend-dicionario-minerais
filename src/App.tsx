@@ -29,6 +29,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/minerals/:id" element={<MineralDetails />} />
+        <Route path="/macro-minerals/:id" element={<MineralDetails />} />
       </Routes>
     </Router>
   );
